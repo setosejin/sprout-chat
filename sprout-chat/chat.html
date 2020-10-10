@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Sprout Chat</title>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/script.js"></script>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div id="wrapper">
+    <div id="userWrap">
+        <nav>
+            <span>
+                Chatting App
+            </span>
+        </nav>
+        <div id="menuList">
+            <div id="menuHeader">메뉴</div>
+            <div class="button menuBtn" id="loginBtn">LOGIN</div>
+            <div class="button menuBtn" id="joinBtn">JOIN</div>
+        </div>
+        <form id="loginForm">
+            <h1>LOGIN</h1>
+            <p><input type="text" placeholder="id" id="loginId" autocomplete="off"></p>
+            <p><input type="password" placeholder="password" id="loginPw" autocomplete="off"></p>
+            <p><input class="btn" type="submit" value="로그인"></p>
+        </form>
+        <form id="joinForm">
+            <h1>JOIN</h1>
+            <p><input type="text" placeholder="id" id="joinId" autocomplete="off"></p>
+            <p><input type="password" placeholder="password" id="joinPw" autocomplete="off"></p>
+            <p><input class="btn" type="submit" value="회원가입"></p>
+        </form>
+    </div>
+    <div id="contentWrap">
+        
+        <button id="logoutBtn">로그아웃</button>
+
+    </div>
+</div>
+</body>
+</html>
