@@ -16,7 +16,7 @@ app.use(express.static('public')); // 정적파일(css, js...)을 사용하기 �
 
 app.get('/', function (req, res) {
     res.redirect('/login');
-}); // '/' 로 들어오는 요쳥을 '/chat'으로 리다이렉팅
+}); // '/' 로 들어오는 요쳥을 '/login'으로 리다이렉팅
 
 app.get('/login', function (req, res) {
     res.sendFile(__dirname + '/login.html');
@@ -46,7 +46,6 @@ io.sockets.on('connection', function (socket) {
             onlineUsers[data.id] = {roomId: 1, socketId: socket.id};
             socket.join('room' + data.roomId);
             cb({result: true, data: "로그인에 성공하였습니다."});
-            res.sendFile(__dirname + '/chat.html');
         } else {
             cb({result: false, data: "등록된 회원이 없습니다. 회원가입을 진행해 주세요."});
             return false;

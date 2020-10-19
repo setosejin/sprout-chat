@@ -1,36 +1,8 @@
-//클라이언트
+///////////////////////////////////////////
+
+
 $(function () {
-    var socket = io.connect();
-    var $userWrap = $('#userWrap');
-    var $contentWrap = $('#contentWrap');
-    var $loginForm = $('#loginForm');
-    var $joinForm = $('#joinForm');
-    var $chatForm = $('#chatForm');
-    var $roomSelect = $('#roomSelect');
-    var $memberSelect = $('#memberSelect');
-    var $chatLog = $('#chatLog');
-    var roomId = 1;
-    var socketId = "";
-
-    $("naverBtn").click(function (e) {
-        e.preventDefault();
-    
-    });
-    
-    $("#loginBtn").click(function (e) {
-        e.preventDefault();
-        $loginForm.show();
-        $joinForm.hide();
-    });
-
-    $("#joinBtn").click(function (e) {
-        e.preventDefault();
-        $joinForm.show();
-        $loginForm.hide();
-    });
-    
-
-    $("#logoutBtn").click(function (e) {
+    $("#logoutBtn2").click(function (e) {
         e.preventDefault();
         socket.emit('logout');
         socketId = "";
@@ -38,6 +10,7 @@ $(function () {
         $userWrap.show();
         $contentWrap.hide();
     });
+
 
     $roomSelect.on("click", "div", function () {
         if (roomId !== $(this).data('id')) {
@@ -151,5 +124,6 @@ $(function () {
         }
         $chatLog.scrollTop($chatLog[0].scrollHeight - $chatLog[0].clientHeight);
     });
+
 
 });
