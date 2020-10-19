@@ -15,11 +15,15 @@ var express = require('express'),
 app.use(express.static('public')); // 정적파일(css, js...)을 사용하기 위한 path 지정
 
 app.get('/', function (req, res) {
-    res.redirect('/chat');
+    res.redirect('/login');
 }); // '/' 로 들어오는 요쳥을 '/chat'으로 리다이렉팅
 
+app.get('/login', function (req, res) {
+    res.sendFile(__dirname + '/login.html');
+}); // '/chat'으로 들어오는 요청은 login.html 을 렌더링
+
 app.get('/chat', function (req, res) {
-    res.sendfile(__dirname + '/chat.html');
+    res.sendFile(__dirname + '/chat.html');
 }); // '/chat'으로 들어오는 요청은 chat.html 을 렌더링
 
 server.listen(port, () => {
@@ -42,6 +46,7 @@ io.sockets.on('connection', function (socket) {
             onlineUsers[data.id] = {roomId: 1, socketId: socket.id};
             socket.join('room' + data.roomId);
             cb({result: true, data: "로그인에 성공하였습니다."});
+            res.sendFile(__dirname + '/chat.html');
         } else {
             cb({result: false, data: "등록된 회원이 없습니다. 회원가입을 진행해 주세요."});
             return false;
