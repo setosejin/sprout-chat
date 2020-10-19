@@ -11,7 +11,42 @@
 </head>
 <body>
 <div id="wrapper">
-        
+    
+    <div id="userWrap">
+        <nav>
+            <span>
+                Chatting App
+            </span>
+        </nav>
+        <div id="menuList">
+            <div id="menuHeader">메뉴</div>
+            <div class="button menuBtn" id="loginBtn">LOGIN</div>
+            <div class="button menuBtn" id="joinBtn">JOIN</div>
+            
+        </div>
+        <form id="loginForm">
+            <h1>LOGIN</h1>
+            <p><input type="text" placeholder="id" id="loginId" autocomplete="off"></p>
+            <p><input type="password" placeholder="password" id="loginPw" autocomplete="off"></p>
+            <p><input class="btn" type="submit" value="로그인"></p>
+            <div class="button menuBtn" id="naverBtn">
+                <a href="https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=8HkITidEmr1tQaw5jtAL&redirect_uri=http://localhost:3000/chat&state=RAMDOM_STATE">
+                    <img height='50' src='http://static.nid.naver.com/oauth/small_g_in.PNG'/>
+                </a>
+            </div>
+        </form>
+        <form id="joinForm">
+            <h1>JOIN</h1>
+            <p><input type="text" placeholder="id" id="joinId" autocomplete="off"></p>
+            <p><input type="password" placeholder="password" id="joinPw" autocomplete="off"></p>
+            <p><input class="btn" type="submit" value="회원가입"></p>
+            <div class="button menuBtn" id="naverBtn">
+                <a href="https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=8HkITidEmr1tQaw5jtAL&redirect_uri=http://localhost:3000/chat&state=RAMDOM_STATE">
+                    <img height='50' src='http://static.nid.naver.com/oauth/small_g_in.PNG'/>
+                </a>
+            </div>
+        </form>
+    </div>
 
     <div id="contentWrap">
         <nav>
@@ -35,18 +70,10 @@
             <div id="chatWrap">
                 <div id="chatHeader">Everyone</div>
                 <div id="chatLog">
-                    <!--
-                    <div class="anotherMsg">
-                        <span class="anotherName">Jo</span>
-                        <span class="msg">Hello, Nice to meet you.</span>
-                    </div>
-                    <div class="myMsg">
-                        <span class="msg">Nice to meet you, too.</span>
-                    </div>
-                    -->
+                     
                 </div>
                 <form id="chatForm">
-                    <input type="text" autocomplete="off" size="30" id="message" placeholder="메시지를 입력하세요">
+                    <input type="text" autocomplete="off" size="20" id="message" placeholder="메시지를 입력하세요">
                     <input type="submit" value="보내기">
                 </form>
             </div>
@@ -54,15 +81,12 @@
                 <div id="memberList">
                     <div id="memberHeader">사람</div>
                     <div id="memberSelect"></div>
-                        <!--
-                        <div class="memberEl">test1</div>
-                        <div class="memberEl">test2</div>
-                        -->
+                         
                 </div>
             </div>
         </div>
     </div>
-  
+    
 </div>
 </body>
 </html>
