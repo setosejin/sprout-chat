@@ -11,8 +11,35 @@ var express = require('express'),
         }
     }, // 기본 회원이 담기는 object
     onlineUsers = {}; // 현재 online인 회원이 담기는 object
-    
+   
+
+var token = "AAAAOpL5lwg7fFsM8_wFtgKtujZfS0EyG7BBapPbPftF3M6NdQnGs7NP1-4-VKSima4qKWOMUjNANLfiOi4q4xuZmco";
+var header = "Bearer " + token; // Bearer 다음에 공백 추가
+
+
 app.use(express.static('public')); // 정적파일(css, js...)을 사용하기 위한 path 지정
+
+app.get('/member', function (req, res) {
+    var api_url = 'https://openapi.naver.com/v1/nid/me';
+    var request = require('request');
+    var options = {
+        url: api_url,
+        headers: {'Authorization': header}
+     };
+    
+    request.get(options, function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+        res.writeHead(200, {'Content-Type': 'text/json;charset=utf-8'});
+        res.end(body);
+      } else {
+        console.log('error');
+        if(response != null) {
+          res.status(response.statusCode).end();
+          console.log('error = ' + response.statusCode);
+        }
+      }
+    });
+  });
 
 app.get('/', function (req, res) {
     res.redirect('/chat');
@@ -41,6 +68,7 @@ io.sockets.on('connection', function (socket) {
         if (loginCheck(data)) {
             onlineUsers[data.id] = {roomId: 1, socketId: socket.id};
             socket.join('room' + data.roomId);
+            
             cb({result: true, data: "로그인에 성공하였습니다."});
         } else {
             cb({result: false, data: "등록된 회원이 없습니다. 회원가입을 진행해 주세요."});
