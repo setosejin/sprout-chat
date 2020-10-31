@@ -3,26 +3,31 @@ $(function () {
     var socket = io.connect();
     var $userWrap = $('#userWrap');
     var $contentWrap = $('#contentWrap');
+    var $chatWrap = $('#chatWrap');
+
     var $loginForm = $('#loginForm');
     var $joinForm = $('#joinForm');
     var $chatForm = $('#chatForm');
     var $roomSelect = $('#roomSelect');
     var $memberSelect = $('#memberSelect');
     var $chatLog = $('#chatLog');
-    var roomId = 1;
+    var roomId = 0; //원래 값 = 1
     var socketId = "";
 
+    /*
     $("naverBtn").click(function (e) {
         e.preventDefault();
         $userWrap.hide();
         $contentWrap.show();
-        $('#chatHeader').html("Everyone");
+        $('#chatHeader').html("");
     });
-    
+    */
+
     $("#loginBtn").click(function (e) {
         e.preventDefault();
         $loginForm.show();
         $joinForm.hide();
+        
     });
 
     $("#joinBtn").click(function (e) {
@@ -42,6 +47,7 @@ $(function () {
     });
 
     $roomSelect.on("click", "div", function () {
+        $chatWrap.show();
         if (roomId !== $(this).data('id')) {
             roomId = $(this).data('id');
         }
@@ -93,7 +99,8 @@ $(function () {
                     pw.val("");
                     $userWrap.hide();
                     $contentWrap.show();
-                    $('#chatHeader').html("Everyone");
+                    $chatWrap.hide();
+                    //$('#chatHeader').html("Room Select");
                 } else {
                     alert(res.data);
                     id.val("");
