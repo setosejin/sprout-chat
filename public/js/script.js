@@ -13,15 +13,7 @@ $(function () {
     var $chatLog = $('#chatLog');
     var roomId = 0; //원래 값 = 1
     var socketId = "";
-
-    /*
-    $("naverBtn").click(function (e) {
-        e.preventDefault();
-        $userWrap.hide();
-        $contentWrap.show();
-        $('#chatHeader').html("");
-    });
-    */
+    
 
     $("#loginBtn").click(function (e) {
         e.preventDefault();
@@ -79,6 +71,30 @@ $(function () {
         $chatLog.append(`<div class="notice"><strong>${data}</strong> joined the room</div>`)
     });
 
+    socket.on('naver login', function (data) { /// 네이버 로그인에 대한 소켓 만드는 중
+        let id = $("#login_name");
+        let pw = $("#login_id");
+
+        socket.emit('join user', {
+            id: id.val(),
+            pw: pw.val()
+        }, function (res){
+            alert(res.data);
+        });
+
+        socket.emit('login user', {
+            id: id.val(),
+            pw: pw.val()
+        }, function (res){
+            roomId = 1;
+            id.val("");
+            pw.val("");
+            $userWrap.hide();
+            $contentWrap.show();
+            $chatWrap.hide();
+        });
+    });
+
     $loginForm.submit(function (e) {
         e.preventDefault();
         let id = $("#loginId");
@@ -100,7 +116,7 @@ $(function () {
                     $userWrap.hide();
                     $contentWrap.show();
                     $chatWrap.hide();
-                    //$('#chatHeader').html("Room Select");
+                    
                 } else {
                     alert(res.data);
                     id.val("");

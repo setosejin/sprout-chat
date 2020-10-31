@@ -14,6 +14,10 @@ html, body {
     display: block;
 }
 
+#naver_id_login {
+    cursor : pointer;
+}
+
 #contentWrap {
     width: 100%;
     min-width: 1280px;
