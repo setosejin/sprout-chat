@@ -104,6 +104,10 @@ nav{
     margin: 20px;
 }
 
+#naverForm {
+    text-align: center;
+}
+
 #roomWrap {
     width: 200px;
     height: 200px;

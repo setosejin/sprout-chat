@@ -62,6 +62,9 @@ io.sockets.on('connection', function (socket) {
         users[data.id] = {id: data.id, pw: data.pw};
         onlineUsers[data.id] = {roomId: 0, socketId: socket.id};
         socket.join('room' + data.roomId);
+        
+        cb({result: true, data: "naver login : \n" + data.id + " & " + data.pw});
+        return true;
     });
 
     socket.on('join room', function (data) {

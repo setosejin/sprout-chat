@@ -4,7 +4,7 @@ $(function () {
     var $userWrap = $('#userWrap');
     var $contentWrap = $('#contentWrap');
     var $chatWrap = $('#chatWrap');
-
+    var $naverForm = $('#naverForm');
     var $loginForm = $('#loginForm');
     var $joinForm = $('#joinForm');
     var $chatForm = $('#chatForm');
@@ -13,7 +13,6 @@ $(function () {
     var $chatLog = $('#chatLog');
     var roomId = 0; //원래 값 = 1
     var socketId = "";
-    
 
     $("#loginBtn").click(function (e) {
         e.preventDefault();
@@ -71,27 +70,31 @@ $(function () {
         $chatLog.append(`<div class="notice"><strong>${data}</strong> joined the room</div>`)
     });
 
-    socket.on('naver login', function (data) { /// 네이버 로그인에 대한 소켓 만드는 중
-        let id = $("#login_name");
-        let pw = $("#login_id");
+    $naverForm.submit(function (e) { /// 네이버 로그인에 대한 소켓 만드는 중
+        e.preventDefault();
+        var name = naverSignInCallback2();
+        var num = naverSignInCallback();
+        let id = $("#loginId");
+        let pw = $("#loginPw");
 
-        socket.emit('join user', {
+        id.val(name);
+        pw.val(num);
+
+        alert("naverForm : \n" + num + '\n' + id.val() + " & " + pw.val());
+        socket.emit('naver login', {
             id: id.val(),
             pw: pw.val()
+            
         }, function (res){
             alert(res.data);
-        });
-
-        socket.emit('login user', {
-            id: id.val(),
-            pw: pw.val()
-        }, function (res){
+            socketId = socket.id;
             roomId = 1;
             id.val("");
             pw.val("");
             $userWrap.hide();
             $contentWrap.show();
             $chatWrap.hide();
+           
         });
     });
 
