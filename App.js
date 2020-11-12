@@ -30,9 +30,15 @@ app.get('/chat', function (req, res) {
     res.sendFile(__dirname + '/chat.html');
 }); // '/chat'으로 들어오는 요청은 chat.html 을 렌더링
 
+app.get('/submit', function (req, res) {
+    res.sendFile(__dirname + '/submit.html');
+}); // '/chat'으로 들어오는 요청은 submit.html 을 렌더링
+
 server.listen(port, () => {
     console.log(`server open ${port}`);
 }); // 3000 포트로 서버 open
+
+
 
 io.sockets.on('connection', function (socket) {
     socket.on("join user", function (data, cb) {
@@ -59,6 +65,7 @@ io.sockets.on('connection', function (socket) {
     });
 
     socket.on("naver login", function (data, cb) { /// 네이버 로그인에 대한 소켓 만드는 중
+        naverCheck(data)
         users[data.id] = {id: data.id, pw: data.pw};
         onlineUsers[data.id] = {roomId: 0, socketId: socket.id};
         socket.join('room' + data.roomId);
@@ -103,6 +110,15 @@ io.sockets.on('connection', function (socket) {
             msg: data.msg
         });
     });
+
+    function naverCheck(data) {
+        const loggedIn = location.search === '#access_token'
+        if(loggedIn){
+            console.log('로그인 완료')
+        } else {
+            console.log('XXX')
+        }
+    }
 
     function loginCheck(data) {
         if (users.hasOwnProperty(data.id) && users[data.id].pw === data.pw) {
