@@ -52,34 +52,6 @@ $(function () {
         });
     });
 
-    $naver_id_login.on("click", "div", function () {
-        var name = naverSignInCallback2();
-        var num = naverSignInCallback();
-        
-        let id = $("#loginId");
-        let pw = $("#loginPw");
-
-        id.val(name);
-        pw.val(num);
-
-        alert("naver click : \n" + num + '\n' + id.val() + " & " + pw.val());
-        socket.emit('naver login', {
-            id: id.val(),
-            pw: pw.val()
-            
-        }, function (res){
-            alert(res.data);
-            socketId = socket.id;
-            roomId = 1;
-            id.val("");
-            pw.val("");
-            $userWrap.hide();
-            $contentWrap.show();
-            $chatWrap.hide();
-           
-        });
-    });
-
     socket.on('userlist', function (data) {
         let html = "";
         data.forEach((el) => {

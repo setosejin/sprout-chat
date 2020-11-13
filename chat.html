@@ -25,7 +25,7 @@
             <!-- 네이버아이디로로그인 버튼 노출 영역 -->
             <form id = "naverForm" name="naverForm">  
                 
-                <div id="naver_id_login">
+                <div id="naver_id_login" type=hidden>
                     
                     <script type="text/javascript">
                         
@@ -44,24 +44,26 @@
                         // 네이버 사용자 프로필 조회
                         naver_id_login.get_naver_userprofile("naverSignInCallback()");
                         naver_id_login.get_naver_userprofile("naverSignInCallback2()");
-                        alert(location)
-                        alert('0' + location.search.indexOf("#"))
+                        
+                        var str = '#access_token';
+                        
                         // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
                         function naverSignInCallback() {
-                            //document.naverForm.submit();
-                            alert('1' + location.search.indexOf("#"))
+                            
                             alert(naver_id_login.getProfileData('name') + ' ' + naver_id_login.getProfileData('email'));
                             return naver_id_login.getProfileData('id');
                         }
                         function naverSignInCallback2() {
-                            alert('2' + location.search.indexOf("#"));
+                            
                             return naver_id_login.getProfileData('name');
                         }
-                        alert('3' + location.search.indexOf("#"))
+                        
+                        if(location.hash.match('#access_token') == str){
+                            alert(location.hash.match('#access_token'))
+                            document.naverForm.submit();
+                        }
                     </script>
                 </div>
-                
-                <input type="submit" value="로그인 완료">
                 
             </form>
             

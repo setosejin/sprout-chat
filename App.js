@@ -32,7 +32,7 @@ app.get('/chat', function (req, res) {
 
 app.get('/submit', function (req, res) {
     res.sendFile(__dirname + '/submit.html');
-}); // '/chat'으로 들어오는 요청은 submit.html 을 렌더링
+}); // '/submit'으로 들어오는 요청은 submit.html 을 렌더링
 
 server.listen(port, () => {
     console.log(`server open ${port}`);
