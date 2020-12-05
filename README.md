@@ -69,4 +69,4 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 
 
 # sprout-chat
-[🥟](https:github.com/setosejin)
+[🥟](https:www.github.com/setosejin)
